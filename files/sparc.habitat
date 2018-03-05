@@ -1,0 +1,138 @@
+# Use this file to templatize your application's native configuration files.
+# See the docs at https//www.habitat.sh/docs/create-packages-configure/.
+# You can safely delete this file if you don't need it.
+rails_binding_ip = "0.0.0.0"
+rails_port = 3000
+
+database_name = "sparc_rails"
+database_username = "sparc"
+
+# It's up to the end user to set a password for their database, we
+# don't want to assume a default that can lead to insecure database
+# servers running in the wild.
+database_password = "rails2010sliar"
+
+# Normally you should use named service binding to bind the "database"
+# name to the database service group, and this app will connect to the
+# leader of that service group. If you do not use binding, this app
+# will fall back to using the database host specified here (localhost).
+# We recommend that this only be used for testing purposes.
+database_host = "REPLACE_PRIVATE_DB_HOST"
+
+# It's highly unlikely anyone would want to change this from the
+# default, right? but it's configurable. Just in case.
+database_port = 3306
+
+ssl_cert_file = ""
+
+## SPARC specific settings
+#
+[sparc.production]
+
+default_mail_to = "noreply@example.org"
+admin_mail_to = "noreply@example.org"
+contact_us_mail_to = "noreply@example.org"
+contact_us_cc = ""
+feedback_mail_to = "noreply@example.org"
+use_feedback_link = true
+new_user_cc = "noreply@example.org"
+system_satisfaction_survey_cc =  "noreply@example.org"
+root_url = "http://REPLACE_PUBLIC_WEB_HOST"
+dashboard_link = "http://REPLACE_PUBLIC_WEB_HOST/dashboard"
+research_master_enabled = false
+research_master_link = ""
+research_master_api = ""
+rmid_api_token = ""
+header_link_1 = "https://www.icts.uiowa.edu"
+header_link_2_proper = "http://REPLACE_PUBLIC_WEB_HOST/"
+header_link_2_dashboard = "http://REPLACE_PUBLIC_WEB_HOST/dashboard"
+header_link_2 = "/"
+header_link_3 = "http://www.uiowa.edu"
+use_indirect_cost = false
+use_shiboleth = true
+use_shibboleth_only = true
+use_ldap = true
+suppress_ldap_for_user_search = true # allow the use of LDAP but suppress its use within the project/study "User Search" box
+wkhtmltopdf_location = "/usr/local/bin/wkhtmltopdf"
+approve_epic_rights_mail_to = "noreply@example.org"
+use_epic = false
+queue_epic = false
+queue_epic_load_error_to = "noreply@example.org"
+use_google_calendar = false
+use_news_feed = false
+epic_queue_report_to = ""
+google_username = ""
+google_password = ""
+calendar_url = ""
+faq_url = ""
+use_faq_link = false
+send_authorized_user_emails = true
+system_satisfaction_survey = false
+no_reply_from = "noreply@example.org"
+
+# Not using these anymore
+custom_asset_path = ""
+
+updatable_statuses = [ "first_draft", "draft", "get_a_cost_estimate", "awaiting_pi_approval"]
+finished_statuses = ["complete", "withdrawn"]
+remote_service_notifier_protocol = "https"
+remote_service_notifier_host = "REPLACE_PUBLIC_FULFILLMENT_HOST"
+remote_service_notifier_path = "/v1/notifications.json"
+remote_service_notifier_username = ""
+remote_service_notifier_password = ""
+host = "<%= @server_name %>"
+current_api_version = "v1"
+fulfillment_contingent_on_catalog_manager = true
+send_emails_to_real_users = false
+listserv_mail_to = "hewwe@musc.edu"
+
+# Some settings Lucas found in an example file I think?
+# We don't seem to be using them
+bug_enhancement_url = ""
+clinical_work_fulfillment_url = "https://REPLACE_PUBLIC_FULFILLMENT_HOST"
+use_about_sparc_link = false
+create_an_account = false
+about_sparc_url = "http://academicdepartments.musc.edu/sctr/sparc_request"
+use_separate_audit_database = false
+
+use_cas = false
+use_cas_only = false
+lazy_load_ldap = true
+
+[sparc.production.editable_statuses]
+
+14 = ["first_draft", "draft", "submitted", "nil", "get_a_quote", "awaiting_pi_approval"]
+48 = ["draft", "submitted"]
+
+[sparc.production.navbar_links]
+
+sparc_request = ["SPARCRequest", "http://REPLACE_PUBLIC_WEB_HOST/"]
+sparc_dashboard = ["Dashboard", "http://REPLACE_PUBLIC_WEB_HOST/dashboard"]
+sparc_fulfillment = ["SPARCFulfillment", "https://REPLACE_PUBLIC_FULFILLMENT_HOST"]
+sparc_catalog = ["SPARCCatalog", "http://REPLACE_PUBLIC_WEB_HOST/catalog_manager"]
+sparc_report = ["SPARCReport", "http://REPLACE_PUBLIC_WEB_HOST/reports"]
+
+[ldap]
+
+host = ""
+port = 3269
+base= ""
+encryption= "simple_tls"
+domain= ""
+uid= "cn"
+last_name= "sn"
+first_name= "givenName"
+email= ""
+auth_username= ""
+auth_password= ""
+filter= ""
+
+[epic]
+
+study_root = "1.2.3.4"
+endpoint = "http://TODO"
+namespace = ""
+
+[shibboleth]
+
+request_type = "header"
