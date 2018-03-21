@@ -282,8 +282,8 @@ resource "aws_instance" "sparc_web" {
     use_sudo = true
     service_type = "systemd"
     service {
-      name = "chrisortman/sparc-request"
-      channel = "unstable"
+      name = "sparc-request/sparc-request"
+      channel = "stable" # not really honored at the moment see https://github.com/hashicorp/terraform/pull/17403/files
       strategy = "at-once"
       user_toml = "${file("files.computed/sparc.habitat")}"
     }
@@ -295,10 +295,11 @@ resource "aws_instance" "sparc_web" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo hab svc unload chrisortman/sparc-request",
+      "sudo hab svc unload sparc-request/sparc-request",
+      "sudo mkdir -p /hab/user/sparc-request/config",
+      "sudo mv /hab/svc/sparc-request/user.toml /hab/user/sparc-request/config/user.toml",
       "sudo touch /hab/svc/sparc-request/data/migrate",
-      "sudo hab pkg install chrisortman/sparc-request --channel unstable",
-      "sudo hab svc load chrisortman/sparc-request --channel unstable --strategy at-once",
+      "sudo hab svc load sparc-request/sparc-request --channel stable --strategy at-once",
       "sudo systemctl restart hab-supervisor"
     ]
   }
